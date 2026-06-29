@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TermMant — Demo Bot WhatsApp</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
@@ -89,7 +93,7 @@
       background: #162340;
       border-radius: 36px;
       overflow: hidden;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
       position: relative;
     }
 
@@ -124,7 +128,9 @@
       flex-shrink: 0;
     }
 
-    .wa-info { flex: 1; }
+    .wa-info {
+      flex: 1;
+    }
 
     .wa-name {
       font-size: 15px;
@@ -150,7 +156,9 @@
       scroll-behavior: smooth;
     }
 
-    .chat-bg::-webkit-scrollbar { width: 0; }
+    .chat-bg::-webkit-scrollbar {
+      width: 0;
+    }
 
     .date-divider {
       text-align: center;
@@ -175,8 +183,14 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .msg-bot {
@@ -200,7 +214,9 @@
       margin-top: 3px;
     }
 
-    .msg-user .msg-time { color: #a8cdc8; }
+    .msg-user .msg-time {
+      color: #a8cdc8;
+    }
 
     .checklist-item {
       display: flex;
@@ -212,10 +228,16 @@
       transition: opacity 0.2s;
     }
 
-    .checklist-item:last-child { border-bottom: none; }
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
 
-    .checklist-item.checked .check-icon { background: #F29D38; }
-    .checklist-item.checked .check-icon::after { opacity: 1; }
+    .checklist-item.checked .check-icon {
+      background: #F29D38;
+    }
+    .checklist-item.checked .check-icon::after {
+      opacity: 1;
+    }
 
     .check-icon {
       width: 20px;
@@ -240,8 +262,14 @@
       transition: opacity 0.2s;
     }
 
-    .check-label { font-size: 12.5px; color: #e9edef; }
-    .checklist-item.checked .check-label { text-decoration: line-through; color: #7a9bbf; }
+    .check-label {
+      font-size: 12.5px;
+      color: #e9edef;
+    }
+    .checklist-item.checked .check-label {
+      text-decoration: line-through;
+      color: #7a9bbf;
+    }
 
     .wa-input {
       background: #1a2d47;
@@ -263,7 +291,9 @@
       outline: none;
     }
 
-    .input-field::placeholder { color: #7a9bbf; }
+    .input-field::placeholder {
+      color: #7a9bbf;
+    }
 
     .send-btn {
       width: 36px;
@@ -279,9 +309,15 @@
       flex-shrink: 0;
     }
 
-    .send-btn:hover { background: #e08c28; }
+    .send-btn:hover {
+      background: #e08c28;
+    }
 
-    .send-btn svg { fill: #fff; width: 16px; height: 16px; }
+    .send-btn svg {
+      fill: #fff;
+      width: 16px;
+      height: 16px;
+    }
 
     .quick-replies {
       display: flex;
@@ -327,12 +363,22 @@
       background: #7a9bbf;
       animation: bounce 1.2s infinite;
     }
-    .dot:nth-child(2) { animation-delay: 0.2s; }
-    .dot:nth-child(3) { animation-delay: 0.4s; }
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
 
     @keyframes bounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-5px); }
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+      }
+      30% {
+        transform: translateY(-5px);
+      }
     }
 
     .restart-btn {
@@ -347,7 +393,10 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .restart-btn:hover { background: #F29D38; color: #fff; }
+    .restart-btn:hover {
+      background: #F29D38;
+      color: #fff;
+    }
 
     .loading {
       text-align: center;
@@ -365,392 +414,347 @@
       margin-bottom: 12px;
     }
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
     .error {
       text-align: center;
       padding: 60px 20px;
       color: #c0392b;
     }
-    .error .icon { font-size: 40px; margin-bottom: 12px; }
+    .error .icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
 
     @media (max-width: 680px) {
-      .scene { flex-direction: column; align-items: center; }
-      .left-panel { text-align: center; }
-      .features { align-items: center; }
-      .phone { width: 300px; }
+      .scene {
+        flex-direction: column;
+        align-items: center;
+      }
+      .left-panel {
+        text-align: center;
+      }
+      .features {
+        align-items: center;
+      }
+      .phone {
+        width: 300px;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="scene">
-  <div class="left-panel">
-    <div class="brand">TermMant · Demo</div>
-    <h1>Mantenimiento<br>preventivo vía<br><span>WhatsApp</span></h1>
-    <p>Tu técnico recibe órdenes de trabajo, completa checklists y reporta fallas — todo desde el chat que ya usa.</p>
-    <div class="features">
-      <div class="feature"><div class="feature-dot"></div>Alertas automáticas por equipo</div>
-      <div class="feature"><div class="feature-dot"></div>Checklists interactivos en el chat</div>
-      <div class="feature"><div class="feature-dot"></div>Fotos de fallas directo al sistema</div>
-      <div class="feature"><div class="feature-dot"></div>Historial completo de cada máquina</div>
-      <div class="feature"><div class="feature-dot"></div>Dashboard para el jefe de planta</div>
+  <div class="scene">
+    <div class="left-panel">
+      <div class="brand">TermMant · Demo</div>
+      <h1>Mantenimiento<br>preventivo vía<br><span>WhatsApp</span></h1>
+      <p>Tu técnico recibe órdenes de trabajo, completa checklists y reporta fallas — todo desde el chat que ya usa.</p>
+      <div class="features">
+        <div class="feature"><div class="feature-dot"></div>Alertas automáticas por equipo</div>
+        <div class="feature"><div class="feature-dot"></div>Checklists interactivos en el chat</div>
+        <div class="feature"><div class="feature-dot"></div>Fotos de fallas directo al sistema</div>
+        <div class="feature"><div class="feature-dot"></div>Historial completo de cada máquina</div>
+        <div class="feature"><div class="feature-dot"></div>Dashboard para el jefe de planta</div>
+      </div>
+    </div>
+
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="status-bar">
+          <span id="clock">9:41</span>
+          <span>▐▐▐ WiFi ⬛</span>
+        </div>
+
+        <div class="wa-header">
+          <div class="wa-avatar" id="botAvatar">🔧</div>
+          <div class="wa-info">
+            <div class="wa-name" id="botName">TermMant Bot</div>
+            <div class="wa-status" id="botStatus">● en línea</div>
+          </div>
+          <span style="color:#7a9bbf;font-size:20px;">⋮</span>
+        </div>
+
+        <div class="chat-bg" id="chat">
+          <div class="date-divider">Hoy</div>
+          <div class="loading" id="loadingIndicator">
+            <div class="spinner"></div>
+            <p>Cargando bot...</p>
+          </div>
+        </div>
+
+        <div class="quick-replies" id="qr-zone" style="display:none;"></div>
+
+        <div class="wa-input">
+          <input class="input-field" id="user-input" placeholder="Escribe un mensaje..." />
+          <button class="send-btn" onclick="handleSend()">
+            <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+          </button>
+        </div>
+      </div>
+      <button class="restart-btn" onclick="restartDemo()">↺ Reiniciar demo</button>
     </div>
   </div>
 
-  <div class="phone-wrap">
-    <div class="phone">
-      <div class="status-bar">
-        <span id="clock">9:41</span>
-        <span>▐▐▐ WiFi ⬛</span>
-      </div>
+  <script>
+    // ═══════════════════════════════════════════════════
+    // 1. CARGAR DATOS DESDE JSON EXTERNO
+    // ═══════════════════════════════════════════════════
 
-      <div class="wa-header">
-        <div class="wa-avatar" id="botAvatar">🔧</div>
-        <div class="wa-info">
-          <div class="wa-name" id="botName">TermMant Bot</div>
-          <div class="wa-status" id="botStatus">● en línea</div>
-        </div>
-        <span style="color:#7a9bbf;font-size:20px;">⋮</span>
-      </div>
+    let botData = null;
+    let currentState = null;
+    let isWaitingForInput = false;
+    let inputCallback = null;
+    let checklistCallback = null;
 
-      <div class="chat-bg" id="chat">
-        <div class="date-divider" id="dateDivider">Hoy</div>
-        <div class="loading" id="loadingIndicator">
-          <div class="spinner"></div>
-          <p>Cargando bot...</p>
-        </div>
-      </div>
+    const chat = document.getElementById('chat');
+    const qrZone = document.getElementById('qr-zone');
+    const userInput = document.getElementById('user-input');
+    const loadingIndicator = document.getElementById('loadingIndicator');
 
-      <div class="quick-replies" id="qr-zone" style="display:none;"></div>
+    async function loadBotData() {
+      try {
+        const response = await fetch('bot-data.json');
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const data = await response.json();
+        botData = data;
+        loadingIndicator.style.display = 'none';
+        // Configurar nombres desde JSON
+        document.getElementById('botName').textContent = data.config.botName;
+        document.getElementById('botAvatar').textContent = data.config.botAvatar;
+        document.getElementById('botStatus').textContent = '● ' + data.config.botStatus;
+        // Iniciar el bot
+        setTimeout(() => goToState('inicio'), 600);
+      } catch (error) {
+        console.error('Error cargando datos del bot:', error);
+        loadingIndicator.innerHTML = `
+          <div class="error">
+            <div class="icon">⚠️</div>
+            <p>No se pudo cargar el bot.</p>
+            <p style="font-size:14px;color:#8899bb;">${error.message}</p>
+            <p style="font-size:13px;color:#8899bb;margin-top:8px;">
+              Verifica que el archivo <strong>bot-data.json</strong> exista en el mismo directorio.
+            </p>
+          </div>
+        `;
+      }
+    }
 
-      <div class="wa-input">
-        <input class="input-field" id="user-input" placeholder="Escribe un mensaje..." />
-        <button class="send-btn" onclick="handleSend()">
-          <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
-        </button>
-      </div>
-    </div>
-    <button class="restart-btn" onclick="restartDemo()">↺ Reiniciar demo</button>
-  </div>
-</div>
+    // ═══════════════════════════════════════════════════
+    // 2. UTILIDADES
+    // ═══════════════════════════════════════════════════
 
-<script>
-// ═══════════════════════════════════════════════════
-// 1. CARGAR DATOS DESDE JSON EXTERNO
-// ═══════════════════════════════════════════════════
+    function now() {
+      const d = new Date();
+      return d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
+    }
 
-let botData = null;
-let currentFlow = null;
-let currentContext = {};
-let checklistState = [];
-let step = 0;
-let isWaitingForInput = false;
-let inputCallback = null;
+    function updateClock() {
+      document.getElementById('clock').textContent = now();
+    }
+    setInterval(updateClock, 10000);
 
-const chat = document.getElementById('chat');
-const qrZone = document.getElementById('qr-zone');
-const userInput = document.getElementById('user-input');
-const loadingIndicator = document.getElementById('loadingIndicator');
+    function addMsg(text, type, delay = 0) {
+      return new Promise(res => {
+        setTimeout(() => {
+          const div = document.createElement('div');
+          div.className = `msg msg-${type}`;
+          div.innerHTML = text + `<div class="msg-time">${now()}${type === 'user' ? ' ✓✓' : ''}</div>`;
+          chat.appendChild(div);
+          chat.scrollTop = chat.scrollHeight;
+          res();
+        }, delay);
+      });
+    }
 
-async function loadBotData() {
-  try {
-    const response = await fetch('bot-data.json');
-    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-    const data = await response.json();
-    botData = data;
-    loadingIndicator.style.display = 'none';
-    // Configurar nombres desde JSON
-    document.getElementById('botName').textContent = data.config.botName;
-    document.getElementById('botAvatar').textContent = data.config.botAvatar;
-    document.getElementById('botStatus').textContent = '● ' + data.config.botStatus;
-    // Iniciar el bot
-    setTimeout(runFlow, 600);
-  } catch (error) {
-    console.error('Error cargando datos del bot:', error);
-    loadingIndicator.innerHTML = `
-      <div class="error">
-        <div class="icon">⚠️</div>
-        <p>No se pudo cargar el bot.</p>
-        <p style="font-size:14px;color:#8899bb;">${error.message}</p>
-        <p style="font-size:13px;color:#8899bb;margin-top:8px;">
-          Verifica que el archivo <strong>bot-data.json</strong> exista en el mismo directorio.
-        </p>
-      </div>
-    `;
-  }
-}
+    function showTyping(duration = 900) {
+      return new Promise(res => {
+        const t = document.createElement('div');
+        t.className = 'typing';
+        t.id = 'typing-indicator';
+        t.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+        chat.appendChild(t);
+        chat.scrollTop = chat.scrollHeight;
+        setTimeout(() => { t.remove(); res(); }, duration);
+      });
+    }
 
-// ═══════════════════════════════════════════════════
-// 2. UTILIDADES
-// ═══════════════════════════════════════════════════
+    function showQuickReplies(options, callback) {
+      qrZone.style.display = 'flex';
+      qrZone.innerHTML = '';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'qr-btn';
+        btn.textContent = opt;
+        btn.onclick = () => {
+          qrZone.style.display = 'none';
+          qrZone.innerHTML = '';
+          addMsg(opt, 'user').then(() => callback(opt));
+        };
+        qrZone.appendChild(btn);
+      });
+    }
 
-function now() {
-  const d = new Date();
-  return d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
-}
-
-function updateClock() {
-  document.getElementById('clock').textContent = now();
-}
-setInterval(updateClock, 10000);
-
-function addMsg(text, type, delay = 0) {
-  return new Promise(res => {
-    setTimeout(() => {
+    function addChecklist(items, callback) {
+      const checklistState = items.map(() => false);
       const div = document.createElement('div');
-      div.className = `msg msg-${type}`;
-      div.innerHTML = text + `<div class="msg-time">${now()}${type === 'user' ? ' ✓✓' : ''}</div>`;
+      div.className = 'msg msg-bot';
+      div.id = 'checklist-msg';
+
+      const title = document.createElement('div');
+      title.style.cssText = 'font-weight:600;margin-bottom:8px;color:#F29D38;font-size:13px;';
+      title.textContent = '📋 Checklist';
+      div.appendChild(title);
+
+      items.forEach((label, i) => {
+        const item = document.createElement('div');
+        item.className = 'checklist-item';
+        item.id = `check-item-${i}`;
+        item.innerHTML = `<div class="check-icon" id="icon-${i}"></div><span class="check-label">${label}</span>`;
+        item.onclick = () => {
+          checklistState[i] = !checklistState[i];
+          item.classList.toggle('checked', checklistState[i]);
+          if (checklistState.every(Boolean)) {
+            document.querySelectorAll('.checklist-item').forEach(el => el.style.pointerEvents = 'none');
+            callback();
+          }
+        };
+        div.appendChild(item);
+      });
+
+      const timeDiv = document.createElement('div');
+      timeDiv.className = 'msg-time';
+      timeDiv.textContent = now();
+      div.appendChild(timeDiv);
+
       chat.appendChild(div);
       chat.scrollTop = chat.scrollHeight;
-      res();
-    }, delay);
-  });
-}
+    }
 
-function showTyping(duration = 900) {
-  return new Promise(res => {
-    const t = document.createElement('div');
-    t.className = 'typing';
-    t.id = 'typing-indicator';
-    t.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
-    chat.appendChild(t);
-    chat.scrollTop = chat.scrollHeight;
-    setTimeout(() => { t.remove(); res(); }, duration);
-  });
-}
+    // ═══════════════════════════════════════════════════
+    // 3. GESTIÓN DE ESTADOS
+    // ═══════════════════════════════════════════════════
 
-function showQuickReplies(options, callback) {
-  qrZone.style.display = 'flex';
-  qrZone.innerHTML = '';
-  options.forEach(opt => {
-    const btn = document.createElement('button');
-    btn.className = 'qr-btn';
-    btn.textContent = opt;
-    btn.onclick = () => {
+    async function goToState(stateId, context = {}) {
+      if (!botData) return;
+      const state = botData.states[stateId];
+      if (!state) {
+        console.error('Estado no encontrado:', stateId);
+        return;
+      }
+      currentState = stateId;
+
+      // Si el estado tiene un mensaje
+      if (state.message) {
+        let msg = state.message;
+        // Reemplazar placeholders
+        if (context.texto) msg = msg.replace(/{texto}/g, context.texto);
+        if (context.opcion) msg = msg.replace(/{opcion}/g, context.opcion);
+        await showTyping(600);
+        await addMsg(msg, 'bot');
+      }
+
+      // Si tiene checklist
+      if (state.checklist) {
+        checklistCallback = () => {
+          // Al completar, ir al estado onComplete
+          const next = state.onComplete;
+          if (next) {
+            setTimeout(() => goToState(next, context), 400);
+          }
+        };
+        addChecklist(state.checklist, checklistCallback);
+        return;
+      }
+
+      // Si tiene input (espera texto libre)
+      if (state.input) {
+        isWaitingForInput = true;
+        inputCallback = async (text) => {
+          isWaitingForInput = false;
+          const next = state.next;
+          if (next) {
+            await goToState(next, { ...context, texto: text });
+          }
+        };
+        userInput.focus();
+        return;
+      }
+
+      // Si tiene quickReplies
+      if (state.quickReplies && state.onReply) {
+        showQuickReplies(state.quickReplies, (selected) => {
+          const nextState = state.onReply[selected];
+          if (nextState) {
+            goToState(nextState, { ...context, opcion: selected });
+          } else {
+            // Si no hay mapeo, buscar por defecto
+            const defaultState = state.onReply['default'];
+            if (defaultState) goToState(defaultState, context);
+          }
+        });
+        return;
+      }
+
+      // Si no tiene interacción, fin del flujo
+    }
+
+    // ═══════════════════════════════════════════════════
+    // 4. MANEJADOR DE ENVÍO DE MENSAJES
+    // ═══════════════════════════════════════════════════
+
+    function handleSend() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      userInput.value = '';
+
+      if (isWaitingForInput && inputCallback) {
+        addMsg(text, 'user').then(() => {
+          const cb = inputCallback;
+          inputCallback = null;
+          isWaitingForInput = false;
+          cb(text);
+        });
+        return;
+      }
+
+      // Si no está esperando input, mostrar mensaje de error
+      addMsg(text, 'user').then(() => {
+        setTimeout(async () => {
+          await showTyping(600);
+          await addMsg('No entendí esa opción. Por favor, usa los botones de respuesta rápida.', 'bot');
+        }, 500);
+      });
+    }
+
+    userInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') handleSend();
+    });
+
+    // ═══════════════════════════════════════════════════
+    // 5. REINICIAR DEMO
+    // ═══════════════════════════════════════════════════
+
+    function restartDemo() {
+      chat.innerHTML = '<div class="date-divider">Hoy</div>';
       qrZone.style.display = 'none';
       qrZone.innerHTML = '';
-      addMsg(opt, 'user');
-      callback(opt);
-    };
-    qrZone.appendChild(btn);
-  });
-}
-
-function addChecklist(items, callback) {
-  checklistState = items.map(() => false);
-  const div = document.createElement('div');
-  div.className = 'msg msg-bot';
-  div.id = 'checklist-msg';
-
-  const title = document.createElement('div');
-  title.style.cssText = 'font-weight:600;margin-bottom:8px;color:#F29D38;font-size:13px;';
-  title.textContent = '📋 Checklist';
-  div.appendChild(title);
-
-  items.forEach((label, i) => {
-    const item = document.createElement('div');
-    item.className = 'checklist-item';
-    item.id = `item-${i}`;
-    item.innerHTML = `<div class="check-icon" id="icon-${i}"></div><span class="check-label">${label}</span>`;
-    item.onclick = () => toggleCheck(i, items, callback);
-    div.appendChild(item);
-  });
-
-  const timeDiv = document.createElement('div');
-  timeDiv.className = 'msg-time';
-  timeDiv.textContent = now();
-  div.appendChild(timeDiv);
-
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-async function toggleCheck(i, items, callback) {
-  checklistState[i] = !checklistState[i];
-  const item = document.getElementById(`item-${i}`);
-  item.classList.toggle('checked', checklistState[i]);
-
-  if (checklistState.every(Boolean)) {
-    // Deshabilitar más clics
-    document.querySelectorAll('.checklist-item').forEach(el => el.style.pointerEvents = 'none');
-    await new Promise(r => setTimeout(r, 400));
-    await addMsg('✅ ¡Todos los ítems completados!', 'user');
-    callback('completado');
-  }
-}
-
-// ═══════════════════════════════════════════════════
-// 3. EJECUTOR DE FLUJOS
-// ═══════════════════════════════════════════════════
-
-async function executeFlow(flowKey, context = {}) {
-  if (!botData) return;
-  const flow = botData.flows[flowKey];
-  if (!flow) {
-    console.error('Flujo no encontrado:', flowKey);
-    return;
-  }
-
-  // Si es un array, ejecutar los pasos secuencialmente
-  if (Array.isArray(flow)) {
-    for (const step of flow) {
-      await executeStep(step, context);
+      userInput.value = '';
+      isWaitingForInput = false;
+      inputCallback = null;
+      checklistCallback = null;
+      currentState = null;
+      // Volver a cargar los datos y ejecutar el flujo
+      setTimeout(() => goToState('inicio'), 400);
     }
-    return;
-  }
 
-  // Si es un objeto con claves (para manejar opciones)
-  currentFlow = flowKey;
-  currentContext = context;
-}
+    // ═══════════════════════════════════════════════════
+    // 6. INICIAR
+    // ═══════════════════════════════════════════════════
 
-async function executeStep(stepConfig, context = {}) {
-  switch (stepConfig.type) {
-    case 'typing':
-      await showTyping(stepConfig.duration || 900);
-      break;
-
-    case 'message':
-      let text = stepConfig.text;
-      // Reemplazar placeholders {texto} con el contexto
-      if (context.texto) {
-        text = text.replace(/{texto}/g, context.texto);
-      }
-      if (context.opcion) {
-        text = text.replace(/{texto}/g, context.opcion);
-      }
-      await addMsg(text, stepConfig.sender);
-      break;
-
-    case 'quickReplies':
-      const options = botData.config.quickReplies[stepConfig.key] || [];
-      showQuickReplies(options, async (selected) => {
-        const nextFlow = stepConfig.next;
-        // Determinar la clave de la opción seleccionada
-        let optionKey = null;
-        if (selected.includes('Compresor') || selected.includes('🔴')) optionKey = 'compresor';
-        else if (selected.includes('Bomba') || selected.includes('🟡')) optionKey = 'bomba';
-        else if (selected.includes('normal') || selected.includes('Todo')) optionKey = 'normal';
-        else if (selected.includes('falla') || selected.includes('Reportar')) optionKey = 'falla';
-        else if (selected.includes('pendientes') || selected.includes('Ver')) optionKey = 'pendientes';
-        else if (selected.includes('Menú') || selected.includes('🏠')) optionKey = 'menu';
-        else if (selected.includes('Crítica')) optionKey = 'critica';
-        else if (selected.includes('Leve')) optionKey = 'leve';
-        else if (selected.includes('foto') || selected.includes('📷')) optionKey = 'con_foto';
-        else if (selected.includes('No tengo')) optionKey = 'sin_foto';
-        else if (selected.includes('tarde') || selected.includes('Más')) optionKey = 'mas_tarde';
-        else optionKey = 'default';
-
-        // Ejecutar el flujo correspondiente
-        if (nextFlow) {
-          const nextFlowData = botData.flows[nextFlow];
-          if (nextFlowData && nextFlowData[optionKey]) {
-            await executeFlow(nextFlowData[optionKey], { ...context, opcion: selected });
-          } else if (nextFlowData && nextFlowData.default) {
-            await executeFlow(nextFlowData.default, { ...context, opcion: selected });
-          } else {
-            console.warn('No se encontró el flujo para:', optionKey);
-          }
-        }
-      });
-      break;
-
-    case 'checklist':
-      addChecklist(stepConfig.items, (result) => {
-        const nextFlow = stepConfig.next;
-        if (nextFlow && botData.flows[nextFlow] && botData.flows[nextFlow].completado) {
-          executeFlow(botData.flows[nextFlow].completado, context);
-        }
-      });
-      break;
-
-    case 'input':
-      isWaitingForInput = true;
-      inputCallback = async (text) => {
-        isWaitingForInput = false;
-        const nextFlow = stepConfig.next;
-        if (nextFlow && botData.flows[nextFlow] && botData.flows[nextFlow].default) {
-          await executeFlow(botData.flows[nextFlow].default, { ...context, texto: text });
-        }
-      };
-      // Enfocar el input
-      userInput.focus();
-      break;
-
-    default:
-      console.warn('Tipo de paso desconocido:', stepConfig.type);
-  }
-}
-
-// ═══════════════════════════════════════════════════
-// 4. FLUJO PRINCIPAL
-// ═══════════════════════════════════════════════════
-
-async function runFlow() {
-  if (!botData) return;
-  const inicioFlow = botData.flows.inicio;
-  if (inicioFlow) {
-    await executeFlow(inicioFlow);
-  }
-}
-
-// ═══════════════════════════════════════════════════
-// 5. MANEJADOR DE ENVÍO DE MENSAJES
-// ═══════════════════════════════════════════════════
-
-function handleSend() {
-  const text = userInput.value.trim();
-  if (!text) return;
-  userInput.value = '';
-
-  if (isWaitingForInput && inputCallback) {
-    addMsg(text, 'user');
-    const cb = inputCallback;
-    inputCallback = null;
-    isWaitingForInput = false;
-    cb(text);
-    return;
-  }
-
-  // Si no está esperando input, mostrar mensaje y continuar con flujo por defecto
-  addMsg(text, 'user');
-  // Podríamos intentar mapear a alguna opción, pero mejor mostramos un mensaje
-  setTimeout(async () => {
-    await showTyping(600);
-    await addMsg('No entendí esa opción. Por favor, usa los botones de respuesta rápida.', 'bot');
-  }, 500);
-}
-
-userInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') handleSend();
-});
-
-// ═══════════════════════════════════════════════════
-// 6. REINICIAR DEMO
-// ═══════════════════════════════════════════════════
-
-function restartDemo() {
-  chat.innerHTML = '<div class="date-divider" id="dateDivider">Hoy</div>';
-  qrZone.style.display = 'none';
-  qrZone.innerHTML = '';
-  userInput.value = '';
-  step = 0;
-  checklistState = [];
-  isWaitingForInput = false;
-  inputCallback = null;
-  currentFlow = null;
-  currentContext = {};
-  // Volver a cargar los datos y ejecutar el flujo
-  setTimeout(runFlow, 400);
-}
-
-// ═══════════════════════════════════════════════════
-// 7. INICIAR
-// ═══════════════════════════════════════════════════
-
-// Cargar datos y iniciar
-loadBotData();
-</script>
+    loadBotData();
+  </script>
 </body>
 </html>
