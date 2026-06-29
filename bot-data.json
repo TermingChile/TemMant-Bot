@@ -1,0 +1,346 @@
+{
+  "config": {
+    "botName": "TermMant Bot",
+    "botAvatar": "🔧",
+    "botStatus": "en línea",
+    "welcomeMessage": "👋 Buenos días, <b>Carlos</b>.\n\nTienes <b>2 órdenes de mantenimiento</b> para hoy.",
+    "welcomeSubMessage": "📍 Planta Norte · Turno Mañana",
+    "quickReplies": {
+      "initial": ["Ver órdenes de hoy", "Más tarde"],
+      "ordenes": ["🔴 Compresor #3", "🟡 Bomba B-07"],
+      "checklist": ["✅ Todo normal", "⚠️ Reportar falla"],
+      "postChecklist": ["📋 Ver pendientes", "🏠 Menú principal"],
+      "postChecklistOrdenes": ["Bomba B-07", "Ventilador Torre"],
+      "menu": ["Ver mis órdenes", "Reportar falla"],
+      "falla": ["🟡 Leve — sigue operando", "🔴 Crítica — detener equipo"],
+      "foto": ["📷 Subir foto", "No tengo foto"]
+    }
+  },
+  "flows": {
+    "inicio": [
+      {
+        "type": "typing",
+        "duration": 800
+      },
+      {
+        "type": "message",
+        "sender": "bot",
+        "text": "👋 Buenos días, <b>Carlos</b>.\n\nTienes <b>2 órdenes de mantenimiento</b> para hoy."
+      },
+      {
+        "type": "typing",
+        "duration": 600
+      },
+      {
+        "type": "message",
+        "sender": "bot",
+        "text": "📍 Planta Norte · Turno Mañana"
+      },
+      {
+        "type": "quickReplies",
+        "key": "initial",
+        "next": "handleInitial"
+      }
+    ],
+    "handleInitial": {
+      "mas_tarde": [
+        {
+          "type": "typing",
+          "duration": 500
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "Entendido. Te recuerdo a las 10:00. 👍"
+        }
+      ],
+      "ver_ordenes": [
+        {
+          "type": "typing",
+          "duration": 800
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "📋 <b>Tus órdenes de hoy:</b>\n\n🔴 <b>Urgente:</b> Compresor #3 — revisión mensual\n🟡 Bomba hidráulica B-07 — revisión semanal\n\n¿Por cuál empezamos?"
+        },
+        {
+          "type": "quickReplies",
+          "key": "ordenes",
+          "next": "handleOrden"
+        }
+      ]
+    },
+    "handleOrden": {
+      "compresor": [
+        {
+          "type": "typing",
+          "duration": 900
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "🔧 Iniciando orden: <b>Compresor #3</b>\n📍 Ubicación: Sala Máquinas — Piso 2\n⏱ Última revisión: hace 32 días"
+        },
+        {
+          "type": "typing",
+          "duration": 700
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "Completa el checklist de revisión. Toca cada ítem al verificarlo:"
+        },
+        {
+          "type": "checklist",
+          "items": ["Nivel de aceite", "Temperatura operación", "Ruido o vibración anormal", "Fugas visibles"],
+          "next": "handleChecklist"
+        }
+      ],
+      "bomba": [
+        {
+          "type": "typing",
+          "duration": 800
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "🔧 Iniciando orden: <b>Bomba hidráulica B-07</b>\n📍 Ubicación: Sala de Bombas — Piso 1\n⏱ Última revisión: hace 15 días"
+        },
+        {
+          "type": "typing",
+          "duration": 600
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "Completa el checklist de revisión. Toca cada ítem al verificarlo:"
+        },
+        {
+          "type": "checklist",
+          "items": ["Presión de trabajo", "Temperatura operación", "Ruido o vibración anormal", "Fugas visibles"],
+          "next": "handleChecklist"
+        }
+      ]
+    },
+    "handleChecklist": {
+      "completado": [
+        {
+          "type": "message",
+          "sender": "user",
+          "text": "✅ ¡Todos los ítems completados!"
+        },
+        {
+          "type": "typing",
+          "duration": 1000
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "👍 Perfecto. ¿Encontraste alguna falla durante la revisión?"
+        },
+        {
+          "type": "quickReplies",
+          "key": "checklist",
+          "next": "handleFallaCheck"
+        }
+      ]
+    },
+    "handleFallaCheck": {
+      "normal": [
+        {
+          "type": "typing",
+          "duration": 800
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "✅ Orden cerrada. El registro quedó guardado en el sistema.\n\n📅 Próxima revisión: <b>Compresor #3</b> en 30 días."
+        },
+        {
+          "type": "typing",
+          "duration": 1500
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "¿Necesitas ver tus otras órdenes pendientes?"
+        },
+        {
+          "type": "quickReplies",
+          "key": "postChecklist",
+          "next": "handlePostChecklist"
+        }
+      ],
+      "falla": [
+        {
+          "type": "typing",
+          "duration": 900
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "⚠️ Describe brevemente la falla:"
+        },
+        {
+          "type": "input",
+          "next": "handleFallaDesc"
+        }
+      ]
+    },
+    "handleFallaDesc": {
+      "default": [
+        {
+          "type": "typing",
+          "duration": 1000
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "🔴 Falla registrada: \"<i>{texto}</i>\"\n\n¿Cuál es la criticidad?"
+        },
+        {
+          "type": "quickReplies",
+          "key": "falla",
+          "next": "handleCriticidad"
+        }
+      ]
+    },
+    "handleCriticidad": {
+      "critica": [
+        {
+          "type": "typing",
+          "duration": 1200
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "🚨 <b>Alerta enviada al jefe de planta.</b>\n\nEl equipo quedó marcado como <b>FUERA DE SERVICIO</b> en el sistema. Se generó una OT de emergencia."
+        },
+        {
+          "type": "typing",
+          "duration": 1200
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "¿Tienes foto de la falla?"
+        },
+        {
+          "type": "quickReplies",
+          "key": "foto",
+          "next": "handleFoto"
+        }
+      ],
+      "leve": [
+        {
+          "type": "typing",
+          "duration": 900
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "📝 Falla leve registrada. Se programó revisión en 72 hrs. Jefe de planta notificado."
+        },
+        {
+          "type": "typing",
+          "duration": 1200
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "¿Tienes foto de la falla?"
+        },
+        {
+          "type": "quickReplies",
+          "key": "foto",
+          "next": "handleFoto"
+        }
+      ]
+    },
+    "handleFoto": {
+      "con_foto": [
+        {
+          "type": "typing",
+          "duration": 700
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "📷 Foto recibida y adjuntada al reporte.\n\n✅ Reporte completo guardado en el sistema."
+        }
+      ],
+      "sin_foto": [
+        {
+          "type": "typing",
+          "duration": 700
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "✅ Reporte guardado sin foto. Puedes adjuntarla luego desde el historial."
+        }
+      ]
+    },
+    "handlePostChecklist": {
+      "pendientes": [
+        {
+          "type": "typing",
+          "duration": 700
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "📋 <b>Tus órdenes pendientes hoy:</b>\n\n1. Bomba hidráulica B-07 — 14:00\n2. Ventilador Torre Enfr. — 16:30\n\n¿Cuál inicias?"
+        },
+        {
+          "type": "quickReplies",
+          "key": "postChecklistOrdenes",
+          "next": "handlePostChecklistOrden"
+        }
+      ],
+      "menu": [
+        {
+          "type": "typing",
+          "duration": 600
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "🏠 Menú principal:\n\n1️⃣ Ver mis órdenes\n2️⃣ Reportar falla\n3️⃣ Historial de equipos"
+        },
+        {
+          "type": "quickReplies",
+          "key": "menu",
+          "next": "handleMenu"
+        }
+      ]
+    },
+    "handlePostChecklistOrden": {
+      "default": [
+        {
+          "type": "typing",
+          "duration": 600
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "🔧 Iniciando orden para <b>{texto}</b>...\n\nPresiona Reiniciar para ver el flujo completo de nuevo."
+        }
+      ]
+    },
+    "handleMenu": {
+      "default": [
+        {
+          "type": "typing",
+          "duration": 600
+        },
+        {
+          "type": "message",
+          "sender": "bot",
+          "text": "Función disponible en la versión completa de TermMant 🚀"
+        }
+      ]
+    }
+  }
+}
